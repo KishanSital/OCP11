@@ -1,0 +1,4 @@
+-Parameter entity parameter container Design pattern
+-Formatting parameters for readability
+-Constants voor zaken die niet veranderen ( Full caps met underscores)
+-Private methods voor if statements (beter leesbaar)
