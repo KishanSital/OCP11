@@ -40,15 +40,12 @@ public class SecondMenuService {
 
         do {
             isNameValid = listService.checkIfNamesListContainsSpecificName();
-
             if (isNameValid == false){
                 triesValidationService.triesValidation();
             }
         } while (isNameValid == false);
 		
-        chosenName = listService.getChosenName();
-		
-       return chosenName;
+       return chosenName = listService.getChosenName();
     }
 
 

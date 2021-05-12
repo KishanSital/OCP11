@@ -22,7 +22,7 @@ public class TriesValidationService {
             System.out.println("Invalid limit has been reached, please restart the application");
             System.exit(0);
 			} else {
-            System.out.println("You have "+ triesLeftCounter + ( (triesLeftCounter > 1) ? " tries":" try") + " left");
+            System.out.println("You have "+ getTriesLeftCounter() + ( (getTriesLeftCounter() > 1) ? " tries":" try") + " left");
 		}
 	}
 	
