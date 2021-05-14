@@ -93,7 +93,7 @@ public class RegisterService extends UserRepository{
 	}
 	
 	private void insertUser(){
-		if (Constants.userRepository.insertUser(userEntity)){
+		if (Constants.userRepository.userInterface.addUser(userEntity)){
 			insertRegistrationMail();
 		}
 	}

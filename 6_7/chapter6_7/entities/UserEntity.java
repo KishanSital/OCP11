@@ -1,8 +1,9 @@
 package chapter6_7.entities;
 
 import chapter6_7.constants.*;
+import java.lang.Object;
 
-public class UserEntity {
+public class UserEntity extends Object {
 	
 	private long userId;
 	private String firstName;
@@ -13,9 +14,11 @@ public class UserEntity {
 	private String birthDate;
 	
 	public UserEntity() {
+	super();
 	}
 	
 	public UserEntity (UserEntity userEntity) {
+		this(); // calls the constructor in this instance of the class which does not have any arguments
 		this.userId = userEntity.getUserId();
 		this.firstName = userEntity.getFirstName();
 		this.lastName = userEntity.getLastName();
@@ -82,6 +85,8 @@ public class UserEntity {
 		this.birthDate = birthDate;
 	}
 	
+	// the toString() method is overridden, because the rules for method override do apply here
+	@Override //informs the compiler that the element is meant to override the toString method declared in Object class
 	public String toString() {
 		return  "userId = " + userId +
 		", firstName = " + firstName  +

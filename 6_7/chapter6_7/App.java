@@ -9,7 +9,7 @@ import chapter6_7.repositories.*;
 import chapter6_7.services.*;
 import chapter6_7.services.*;
 
-public class App {
+public class App{
 	
     public static void main (String ... args){
 

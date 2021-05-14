@@ -10,6 +10,7 @@ import java.util.*;
 
 @FunctionalInterface
 interface LoggedInInterface{
+	
 	void loggedInMenuNavigator();
 }
 public class LoggedInMenuService implements MenuInterface {

@@ -7,30 +7,44 @@ import java.util.*;
 
 public class Constants {
 	
-	private Constants(){
+	private Constants(){ // never called
+	/*we can't create a new instance of the constants class (unless it's an innerclass),
+	because the constructor is marked private
+	*/
+	this("hi");
+	}
+	
+	private Constants(String welcomeString){ // never called
+	/* calls the constructor in the java.util.Object class,
+	because we're not extending a specific class
+	*/
 	super();
+	System.out.println(welcomeString); 
 	}
 	
     public static final void displayWelcomeMessage(){
         System.out.println(WELCOME_MESSAGE);
 	}
-    public static final int RETRY_LIMIT = 5;
-    public static final int NO_TRIES_LEFT = 0;
-    public static final int QUESTION_MESSAGE_INDEX = 0;
-    public static final String GMAIL_SUFFIX = "@gmail.com";
+	
+    public static final int RETRY_LIMIT;
+    public static final int NO_TRIES_LEFT;
+    public static final int QUESTION_MESSAGE_INDEX;
+    public static final String GMAIL_SUFFIX ;
     public static UserRepository userRepository;
 	public static MailRepository mailRepository;
-	public static final String COMING_FROM_INBOX = "inbox";
-	public static final String COMING_FROM_SENT = "sent";
+	public static final String COMING_FROM_INBOX;
+	public static final String COMING_FROM_SENT;
+	public static final String WELCOME_MESSAGE;
 
-	static {
-		UserEntity userEntity = new UserEntity();
-		userRepository = new UserRepository(userEntity);
-		userRepository.insertStandardUser();
-		mailRepository = new MailRepository();
-	}
-
-    public static final String WELCOME_MESSAGE = "                                                                                                                                                                                                                      \n" +
+	static { // static initializer block
+		System.out.println("Constants CLASS is being initialized");
+		RETRY_LIMIT = 5;
+		NO_TRIES_LEFT = 0;
+		QUESTION_MESSAGE_INDEX = 0;
+		GMAIL_SUFFIX = "@gmail.com";
+		COMING_FROM_INBOX = "inbox";
+		COMING_FROM_SENT = "sent";
+	    WELCOME_MESSAGE = "                                                                                                                                                                                                                      \n" +
 	"                                                                                                                                                                                                                      \n" +
 	"                                                                                                                                                                                                                      \n" +
 	"  ome t  Gmai  elcom  to GmailWe   me to            e to        lcome    Gmail        to G ailWelcome          elcome to Gm    elcome              me to      Welco       mailW       to        lcome    Gmail        \n" +
@@ -46,7 +60,9 @@ public class Constants {
 	"       me    Gm      come to Gmai  elcome to G    Welcome       ilWelc    to Gm il  lcome  o GmailWelco           Welcome      ailWel              elcome t    ailWe co   to Gm ilWelc    to Gm ilWelco e to GmailW   \n" +
 	"                                                                                                                                                                                                                      \n" +
 	"                                                                                                                                                                                                                      ";
-	
-	
-	
+		UserEntity userEntity = new UserEntity();
+		userRepository = new UserRepository(userEntity);
+		userRepository.insertStandardUser();
+		mailRepository = new MailRepository();
+	}
 }

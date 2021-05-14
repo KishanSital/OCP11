@@ -1,7 +1,7 @@
 package chapter6_7.repositories;
 
 import chapter6_7.entities.*;
-
+import chapter6_7.interfaces.*;
 import java.util.*;
 import java.util.function.*;
 
@@ -10,6 +10,7 @@ public class UserRepository {
 	private UserEntity user;
 	private List <UserEntity> usersList = new ArrayList<UserEntity>();
 	private Consumer<String> consumerMessages = msg -> System.out.println(msg);
+	public UserInterface<UserEntity> userInterface = u -> insertUser(u);
 
 	public UserRepository(UserEntity userEntity) {
 		this.user = userEntity;
@@ -26,7 +27,7 @@ public class UserRepository {
 		user.setPassword("1234");
 		user.setPhoneNumber("005978544998");
 		user.setBirthDate("3-06-1999");
-		insertUser(user);
+		userInterface.addUser(user);
 	}
 
 	public boolean insertUser(UserEntity user){

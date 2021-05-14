@@ -1,15 +1,18 @@
 package chapter6_7.entities;
 
 import chapter6_7.constants.*;
+import java.lang.Object; // JVM makes sure that all the casses of the java.lang package gets imported so this is not manditory
 
-public class MailEntity {
+public class MailEntity extends Object{ // JVM takes care of extending the Object class, so this is not manditory
 	private long mailId;
 	private String receiverUsername;
 	private String senderUsername;
 	private String subject;
 	private String message;
 	
-	public MailEntity(MailEntity mailEntity) {
+	public MailEntity(MailEntity mailEntity) { // constructor
+		super(); // calls the java.util.Object constructor
+		//this. is optional, because there is no conflict with variable naming in this case
 		this.mailId = mailEntity.getMailId();
 		this.receiverUsername = mailEntity.getReceiverUsername();
 		this.senderUsername = mailEntity.getSenderUsername() ;
@@ -17,7 +20,8 @@ public class MailEntity {
 		this.message = mailEntity.getMessage();
 	}
 	
-	public MailEntity() {
+	public MailEntity() { // construtor
+		super();
 	}
 	
 	public long getMailId() {
@@ -41,7 +45,10 @@ public class MailEntity {
 	}
 
 	public void setMailId(long mailId) {
-		this.mailId = mailId;
+		this.mailId = mailId; 
+		// in this case this. is required, because I want to assign the value that came from the parameter to 
+		//my instance variable
+		// same goes for all of my setters
 	}
 
 	public void setReceiverUsername(String receiverUsername) {
@@ -61,12 +68,14 @@ public class MailEntity {
 	}
 
 
+	// this is not overriding, because the method signature is not the same as  the toString() of the Object class
 	public String toStringReceivedMail() {
 		return " From: " + senderUsername +
 				"\n Subject: " + subject +
 				"\n Message: " + message + "\n";
 	}
 
+	// not overriding, method signature is different than the toString() in Object class
 	public String toStringSentMail() {
 		return " To: " + receiverUsername +
 				"\n Subject: " + subject +
