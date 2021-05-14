@@ -2,35 +2,51 @@ package chapter6_7.repositories;
 
 import chapter6_7.constants.*;
 import chapter6_7.entities.*;
-
 import java.util.*;
 import java.util.function.*;
+import chapter6_7.interfaces.*;
 
 public class MailRepository {
 	
-
 	private List <MailEntity> inboxMailsList = new ArrayList<MailEntity>();
 	private List <MailEntity> sentMailsList = new ArrayList<>();
 	private Consumer <String> consumerMessages = x -> System.out.println(x);
+	public  AddToListInterface <MailEntity> addMailInterface = m -> insertAllMails(m);
 	private Scanner scanner;
 	private int mailsFound;
 	private final int noMailsFound = 0;
 
 
 	public MailRepository(){
+		super();
 		this.scanner = new Scanner(System.in);
 	}
 
-	public void insertMailInList (MailEntity mail){
+	private boolean insertMailInList (MailEntity mail){
 		mail.setMailId(autoIncrementId());
-		inboxMailsList.add(new MailEntity(mail));
-
+		if (inboxMailsList.add(new MailEntity(mail))){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public void insertMailInSentList (MailEntity mail){
+	private boolean insertMailInSentList (MailEntity mail){
 		mail.setMailId(autoIncrementIdMailsSent());
-		sentMailsList.add(new MailEntity(mail));
+		if (sentMailsList.add(new MailEntity(mail))){
+			return true;
+		} else {
+			return false;
+		}
+	}
 
+	public boolean insertAllMails(MailEntity mail){
+		if (insertMailInList(mail) && insertMailInSentList(mail)){
+		return true;
+		} else {
+		consumerMessages.accept("Something went wrong, please try again later");
+		return false;
+		}
 	}
 	
 	public long autoIncrementId(){

@@ -31,7 +31,6 @@ public class SendMailService{
         println.accept("Enter the message");
         mailEntity.setMessage(scanner.next());
         println.accept("Mail has been sent successfully");
-        Constants.mailRepository.insertMailInList(mailEntity);
-        Constants.mailRepository.insertMailInSentList(mailEntity);
+        Constants.mailRepository.addMailInterface.add(mailEntity);
     }
 }

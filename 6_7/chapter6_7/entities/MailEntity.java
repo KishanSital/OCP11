@@ -20,7 +20,7 @@ public class MailEntity extends Object{ // JVM takes care of extending the Objec
 		this.message = mailEntity.getMessage();
 	}
 	
-	public MailEntity() { // construtor
+	public MailEntity() { // construtor with no arguments
 		super();
 	}
 	
@@ -46,9 +46,10 @@ public class MailEntity extends Object{ // JVM takes care of extending the Objec
 
 	public void setMailId(long mailId) {
 		this.mailId = mailId; 
-		// in this case this. is required, because I want to assign the value that came from the parameter to 
-		//my instance variable
-		// same goes for all of my setters
+		/* in this case this. is required, because I want to assign the value that came from the parameter to 
+		   my instance variable
+		   same goes for all of my setters 
+		*/
 	}
 
 	public void setReceiverUsername(String receiverUsername) {

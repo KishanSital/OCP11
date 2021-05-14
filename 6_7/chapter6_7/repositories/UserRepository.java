@@ -10,9 +10,10 @@ public class UserRepository {
 	private UserEntity user;
 	private List <UserEntity> usersList = new ArrayList<UserEntity>();
 	private Consumer<String> consumerMessages = msg -> System.out.println(msg);
-	public UserInterface<UserEntity> userInterface = u -> insertUser(u);
+	public AddToListInterface<UserEntity> addUserInterface = u -> insertUser(u);
 
 	public UserRepository(UserEntity userEntity) {
+		super();
 		this.user = userEntity;
 	}
 	
@@ -20,6 +21,7 @@ public class UserRepository {
 	}
 	
 	public void insertStandardUser (){
+		{
 		user.setUserId(1);
 		user.setFirstName("Kishan");
 		user.setLastName("Sital");
@@ -27,10 +29,22 @@ public class UserRepository {
 		user.setPassword("1234");
 		user.setPhoneNumber("005978544998");
 		user.setBirthDate("3-06-1999");
-		userInterface.addUser(user);
+		addUserInterface.add(user);
+		}
+		{
+		user = new UserEntity();
+		user.setUserId(autoIncrementId());
+		user.setFirstName("Kishan");
+		user.setLastName("Sital");
+		user.setUsername("kishan");
+		user.setPassword("1234");
+		user.setPhoneNumber("005978544998");
+		user.setBirthDate("3-06-1999");
+		addUserInterface.add(user);		
+		}
 	}
 
-	public boolean insertUser(UserEntity user){
+	private boolean insertUser(UserEntity user){
 		if (usersList.add(new UserEntity(user))){
 			printNewlyAddedUser();
 			return true;

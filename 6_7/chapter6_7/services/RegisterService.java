@@ -93,7 +93,7 @@ public class RegisterService extends UserRepository{
 	}
 	
 	private void insertUser(){
-		if (Constants.userRepository.userInterface.addUser(userEntity)){
+		if (Constants.userRepository.addUserInterface.add(userEntity)){
 			insertRegistrationMail();
 		}
 	}
@@ -104,7 +104,7 @@ public class RegisterService extends UserRepository{
 		mailEntity.setMessage(userEntity.getFirstName().substring(0,1).toUpperCase()
 							 + userEntity.getFirstName().substring(1)
 							 +" ,thank you for creating a Gmail account with us");
-		Constants.mailRepository.insertMailInList(mailEntity);
-		Constants.mailRepository.insertMailInSentList(mailEntity);
+		Constants.mailRepository.addMailInterface.add(mailEntity);
+
 	}
 }	
