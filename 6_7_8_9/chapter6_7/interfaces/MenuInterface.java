@@ -1,5 +1,5 @@
 package chapter6_7.interfaces;
-//normal interface
+//interface
 public interface MenuInterface {
   public void menuOptions();
   public void resetAllValidationServices();

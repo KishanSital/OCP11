@@ -1,7 +1,7 @@
 package chapter6_7.views;
-import chapter6_7.entities.*;
+import chapter6_7.services.*;
 
-public class GmailInfoView extends Info {
+public class GmailInfoView extends InfoService {
 	//member hiding
 	public static String classLocation = "New Location GmailInfoView.java";
 	

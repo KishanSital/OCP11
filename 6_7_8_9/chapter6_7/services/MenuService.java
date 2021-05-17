@@ -14,7 +14,8 @@ public class MenuService implements MenuInterface {
     private int exitCode = 5;
 	private Scanner scanChoice;
 	private GmailInfoView gmailInfoView;
-	private Info info;
+	private InfoService infoService;
+	private Info infoAbstractClass;
 	
     public MenuService (){
 		super();
@@ -26,7 +27,7 @@ public class MenuService implements MenuInterface {
 		scanChoice = new Scanner(System.in);
 		resetAllValidationServices();
 		
-		info = new Info();
+		infoService = new InfoService();
 		gmailInfoView = new GmailInfoView();
 	}
 	
@@ -71,11 +72,15 @@ public class MenuService implements MenuInterface {
 				break;
 				case 3:
 					resetAllValidationServices();
-					InfoInterface infoInterface = info; //casting Info object from heap memory with all of it's properties to InfoInterface type 
-					infoInterface.welcomeMessage(); //calling methods that are available in InfoInterface using same properties of Info object from the heap memory
+					InfoInterface infoInterface = infoService; //casting InfoService object from heap memory with all of it's properties to InfoInterface type 
+					infoInterface.welcomeMessage(); //calling methods that are available in InfoInterface using same properties of InfoService object from the heap memory
 					infoInterface.gmailHistory(); // same happens here
-					info = null; // info reference points to no object on heap memory
-					info.printOutLocation(); // because it's a static method JVM will know that you're calling a static class method 
+					
+					infoAbstractClass = infoService; // casting infoService object from heap memory with it's properties to infoAbstractClass
+					infoAbstractClass.welcomeMessage(); // calling methods that are available in  infoAbstractClass with the properties of infoService object
+					
+					infoService = null; // InfoService reference points to no object on heap memory
+					infoService.printOutLocation(); // because it's a static method JVM will know that you're calling a static class method 
 					System.out.println("");
 				
 				break;
@@ -84,11 +89,15 @@ public class MenuService implements MenuInterface {
 					resetAllValidationServices();
 					gmailInfoView = null; // gmailInfoView reference doesn't point to any object on heap memory
 					gmailInfoView.printOutLocation(); // calling static hidden method from GmailInfoView class				
-					info = new GmailInfoView(); // Info reference now points to a new object of GmailInfoView on heap memory
-					info.welcomeMessage(); //calling the methods that are available from the Info type with properties of GmailInfoView from heap memory
-					info.gmailHistory();// same happens here
-					info = null;// info reference now points to null
-					info.printOutLocation(); // calling the static method from Info class
+					infoService = new GmailInfoView(); // InfoService reference now points to a new object of GmailInfoView on heap memory
+					infoService.welcomeMessage(); //calling the methods that are available from the InfoService type with properties of GmailInfoView from heap memory
+					infoService.gmailHistory();// same happens here
+					
+					infoAbstractClass = infoService; // infoService reference points to the GmailInfoView object on our heap memory and our infoAbstractClass reference also points to the same object( both will make use of the same properties)
+					infoAbstractClass.welcomeMessage();
+					
+					infoService = null;// InfoService reference now points to null
+					infoService.printOutLocation(); // calling the static method from InfoService class
 					System.out.println("");
 				break;
 				

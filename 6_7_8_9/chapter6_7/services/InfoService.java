@@ -1,14 +1,14 @@
-package chapter6_7.entities;
+package chapter6_7.services;
 
 import chapter6_7.interfaces.*;
 import java.lang.*;
 
-
-public class Info extends Object implements InfoInterface {
+// concrete class that inherits all the abstract methods from InfoInterface and Info, all the abstract methods must be implemented 
+public class InfoService extends Info{
 	
 	public static String classLocation = "Old location Info.java"; // static member, will be initialized when loading class
 	
-	public Info(){
+	public InfoService(){
 		super();
 	}
 	@Override
@@ -22,7 +22,7 @@ public class Info extends Object implements InfoInterface {
 	
 	@Override
 	public CharSequence message(){ //overriding message() method from infoInterface
-		return "Welcome to Gmail";
+		return "Welcome to Gmail (old version)";
 	}
 	
 	public static void printOutLocation(){ // static method will be initialized when loading class

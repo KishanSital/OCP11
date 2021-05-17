@@ -1,6 +1,6 @@
 package chapter6_7.interfaces;
 
-// normal interface with package private access modifiers
+//interface with abstract public methods
 public interface InfoInterface {
 	 void welcomeMessage();
 	 void gmailHistory();
