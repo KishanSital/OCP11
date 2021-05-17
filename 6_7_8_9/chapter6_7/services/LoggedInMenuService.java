@@ -20,7 +20,7 @@ public class LoggedInMenuService implements MenuInterface { // method signature 
 	private MailsView mailsView;
 
     public LoggedInMenuService (String loggedInUser){
-		super(); // super() or this() must always be the first line in a constructor if used, and both can't be used simultaniously in one constructor
+		super(); // super() or this() must always be the first line in a constructor if used, both can't be used simultaniously in one constructor
         this.loggedInUser = loggedInUser;
 		init();
 	}

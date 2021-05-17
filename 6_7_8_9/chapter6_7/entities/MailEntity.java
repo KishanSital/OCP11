@@ -47,7 +47,7 @@ public class MailEntity extends Object{ // JVM takes care of extending the Objec
 	public void setMailId(long mailId) {
 		this.mailId = mailId; 
 		/* in this case this. is required, because I want to assign the value that came from the parameter to 
-		   my instance variable
+		   my instance variable which has the same name as my method parameter 
 		   same goes for all of my setters 
 		*/
 	}

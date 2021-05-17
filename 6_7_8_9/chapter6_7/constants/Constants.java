@@ -15,9 +15,7 @@ public class Constants {
 	}
 	
 	private Constants(String welcomeString){ // never called
-	/* calls the constructor in thejava.lang.Object class,
-	because we're not extending a specific class
-	*/
+	/* calls the constructor in thejava.lang.Object class */
 	super();
 	System.out.println(welcomeString); 
 	}

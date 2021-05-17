@@ -112,7 +112,7 @@ public class MailRepository {
 		}
 		if (mailsFound > noMailsFound) {
 			consumerMessages.accept("Type the mail Id you'd like to delete\n");
-			removingSentMail(loggedInUser);
+			removingInboxMail(loggedInUser);
 		} else {
 				consumerMessages.accept("Inbox was empty\n");
 		}
@@ -128,8 +128,8 @@ public class MailRepository {
 				triesValidation();
 				consumerMessages.accept("The given Id does not exist\n");
 				}				
-			} while (!isIdSelectionValid);
-			boolean isMailRemoved = getSentMailsList().removeIf(sentMail -> (sentMail.getMailId() == mailId)); //removeIn() method from Lamba API
+		} while (!isIdSelectionValid);
+			boolean isMailRemoved = getSentMailsList().removeIf(sentMail -> (sentMail.getMailId() == mailId)); //removeIf() method from Lamba API, mailId must be effectively final if used as local variable or method parameter
 			if (isMailRemoved){
 				consumerMessages.accept("Mail removed successfully\n");
 			}

@@ -4,10 +4,10 @@ import chapter6_7.constants.*;
 
 public class TriesValidationService {
 	
-    private static int triesLeftCounter  , triedCounter ;
+    private static int triesLeftCounter, triedCounter ;
 	
     private TriesValidationService(){
-	super();	
+		super();	
 	}
 	
     public static void resetTriesService(){
@@ -21,11 +21,10 @@ public class TriesValidationService {
         if ( triedCounter >= Constants.RETRY_LIMIT){
             System.out.println("Maximum tries have been reached, please restart the application");
             System.exit(0);
-			} else {
+		} else {
             System.out.println("You have "+ triesLeftCounter + ( (triesLeftCounter > 1) ? " tries":" try") + " left");
 		}
 	}
-	
     public static int getTriesLeftCounter(){
         return triesLeftCounter;
 	}

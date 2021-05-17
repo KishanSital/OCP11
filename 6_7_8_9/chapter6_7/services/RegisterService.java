@@ -17,7 +17,7 @@ public class RegisterService{
 							UserEntity userEntity){
 		super();
 		this.userEntity = userEntity; 
-		this.mailEntity = mailEntity;// this is mandatory here, because the instance variable name and method parameter variable names don't differ from one another
+		this.mailEntity = mailEntity;// this. is mandatory here, because the instance variable name and method parameter variable names don't differ from one another
 	}
 	
 	public void createNewUser(){

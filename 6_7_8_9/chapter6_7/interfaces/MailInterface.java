@@ -1,6 +1,6 @@
 package chapter6_7.interfaces;
 
 @FunctionalInterface
-public interface MailInterface {
-    void init(); // package private modifier
+public abstract interface MailInterface {
+   public abstract void init();
 }

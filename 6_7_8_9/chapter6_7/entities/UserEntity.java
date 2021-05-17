@@ -85,7 +85,7 @@ public class UserEntity extends Object { //inheritance
 		this.birthDate = birthDate;
 	}
 	
-	// the toString() method is overridden, because the rules for method override do apply here
+	// the toString() method is overridden, because the rules for method overriding do apply here
 	@Override //informs the compiler that the element is meant to override the toString method declared in Object class
 	public String toString() { // overridden method toString()
 		return  "userId = " + userId +
