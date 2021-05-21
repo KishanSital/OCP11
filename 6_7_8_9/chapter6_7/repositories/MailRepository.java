@@ -146,7 +146,7 @@ public class MailRepository {
 	}
 	
 	private void removingInboxMail(String loggedInUser){
-	boolean isIdSelectionValid = false;
+		boolean isIdSelectionValid = false;
 			resetTriesService();
 			do {
 				mailId = scanner.nextLong();

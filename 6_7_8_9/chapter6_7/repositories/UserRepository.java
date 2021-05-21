@@ -21,7 +21,7 @@ public class UserRepository {
 		super();
 	}
 	
-	public void insertStandardUser (){
+	public void insertStandardUser(){
 		{
 		user.setUserId(1);
 		user.setFirstName("Kishan");

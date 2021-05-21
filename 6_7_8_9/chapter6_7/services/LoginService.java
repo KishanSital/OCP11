@@ -34,7 +34,7 @@ public class LoginService extends Object{
 
 			isAuthentication = authenticateUser(k -> {
 				if ( (k.getUsername().equalsIgnoreCase(username)) &&
-					 (k.getPassword().equalsIgnoreCase(password)) ) {
+					 (k.getPassword().equals(password)) ) {
 					return true;
 				} else {
 					return false;
