@@ -8,7 +8,7 @@ import chapter6_7.*;
 
 public class LoggedInMenuService implements MenuInterface {
     private List<String> loggedInMenuOptions;
-    private int exitCode = 6;
+    private int exitCode = 5;
     private Scanner scanChoice;
     private FileServices fileServices;
     private String directory;
