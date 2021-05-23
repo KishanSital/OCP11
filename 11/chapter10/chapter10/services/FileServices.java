@@ -30,6 +30,7 @@ public class FileServices {
     public void writeToFile() {
         resetTriesService();
         do {
+		    resetFileCheckAndScanner();
             displayFiles();
             System.out.println(ENTER_THE_FILE_NAME_FOR_WRITING_PURPOSES_MESSAGE);
             String directoryAndFileName = directory + scanner.next();
@@ -86,6 +87,7 @@ public class FileServices {
     public void readFromFile() {
         resetTriesService();
         do {
+			resetFileCheckAndScanner();
             displayFiles();
             System.out.println(ENTER_THE_FILE_NAME_FOR_READING_PURPOSES_MESSAGE);
             String directoryAndFileName = directory + scanner.next();
@@ -111,6 +113,7 @@ public class FileServices {
 
     public void deleteFile() {
         do {
+			resetFileCheckAndScanner();
             displayFiles();
             System.out.println(ENTER_THE_FILE_NAME_FOR_DELETING_PURPOSES_MESSAGE);
             String directoryAndFileName = directory + scanner.next();
@@ -123,7 +126,7 @@ public class FileServices {
                     System.out.println(FAILED_TO_DELETE_FILE_MESSAGE);
                     throw new IOException();
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 triesValidation();
                 System.out.println(SOMETHING_WENT_WRONG_WHILE_DELETING_FILE_MESSAGE);
                 e.printStackTrace();
@@ -135,6 +138,7 @@ public class FileServices {
     public void createAFile() {
         resetTriesService();
         do {
+			resetFileCheckAndScanner();
             displayFiles();
             System.out.println(TYPE_THE_NAME_OF_THE_NEW_FILE_MESSAGE);
             String directoryAndFileName = directory + scanner.next();
