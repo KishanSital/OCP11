@@ -19,4 +19,3 @@ jar -cf mods/chapter.one.jar -C chapter1/classes .
 
 ::jdeps mods/chapter.one.jar
 ::shows all the dependencies for chapter.one.jar 
-pause
