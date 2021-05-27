@@ -5,21 +5,26 @@ public class FireArmModel {
     private String fireArmCategory;
     private String fireArmName;
     private int stockAmount;
+    private double pricePerItem;
 
     public FireArmModel(Long fireArmId,
                         String fireArmCategory,
                         String fireArmName,
-                        int stockAmount) {
+                        int stockAmount,
+                        double pricePerItem) {
         this.fireArmId = fireArmId;
         this.fireArmCategory = fireArmCategory;
         this.fireArmName = fireArmName;
         this.stockAmount = stockAmount;
+        this.pricePerItem = pricePerItem;
     }
 
     public FireArmModel(FireArmModel fireArmModel) {
         this.fireArmId = fireArmModel.getFireArmId();
         this.fireArmCategory = fireArmModel.getFireArmCategory();
         this.fireArmName = fireArmModel.getFireArmName();
+        this.stockAmount = fireArmModel.getStockAmount();
+        this.pricePerItem = fireArmModel.getPricePerItem();
     }
 
     public FireArmModel() {
@@ -32,7 +37,8 @@ public class FireArmModel {
                 "firearm id = " + fireArmId + "\n" +
                 "firearm category = " + fireArmCategory + "\n" +
                 "firearm name = " + fireArmName + "\n" +
-                "amount = " + stockAmount +"\n";
+                "amount = " + stockAmount +"\n"+
+                "price per item = $" + pricePerItem +"\n";
     }
 
     public class FireArmSpecification {
@@ -103,6 +109,14 @@ public class FireArmModel {
 
         public void setStockAmount(int stockAmount) {
             FireArmModel.this.setStockAmount(stockAmount);
+        }
+
+        public double getPricePerItem (){
+           return FireArmModel.this.getPricePerItem();
+        }
+
+        public void setPricePerItem(double pricePerItem){
+            FireArmModel.this.setPricePerItem(pricePerItem);
         }
 
         public String getCaliber() {
@@ -205,5 +219,13 @@ public class FireArmModel {
 
     public void setStockAmount(int stockAmount) {
         this.stockAmount = stockAmount;
+    }
+
+    public double getPricePerItem() {
+        return pricePerItem;
+    }
+
+    public void setPricePerItem(double pricePerItem) {
+        this.pricePerItem = pricePerItem;
     }
 }

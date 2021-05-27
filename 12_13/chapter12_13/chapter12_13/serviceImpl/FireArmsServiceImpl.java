@@ -19,17 +19,19 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
     private int amountToSell = 0;
     private int iteration = 0;
     private String fireArmName;
+    private double totalSoldPrice = 0;
     private Consumer<FireArmModel.FireArmSpecification> printOutFireArm = fireArm -> System.out.println("Firearm:\n" +
             "firearm id = " + fireArm.getFireArmId() + "\n" +
             "firearm category = " + fireArm.getFireArmCategory() + "\n" +
             "firearm name = " + fireArm.getFireArmName() + "\n" +
             "amount = " +  fireArm.getStockAmount() +"\n"+
+            "price per item  = $" +  fireArm.getPricePerItem() +"\n"+
             "Firearm specification:\n" +
             "caliber = " + fireArm.getCaliber() + "\n" +
             "weight without magazine = " + fireArm.getWeightWithoutMagazine() + "\n" +
             "weight with empty magazine = " + fireArm.getWeightWithEmptyMagazine() + "\n" +
             "weight with loaded magazine = " + fireArm.getWeightWithLoadedMagazine() + "\n" +
-            "magazine capacity = " + fireArm.getMagazineCapacity() +
+            "magazine capacity = " + fireArm.getMagazineCapacity() + "\n"+
             "barrel length = " + fireArm.getBarrelLength() + "\n" +
             "trigger pull = " + fireArm.getTriggerPull() + "\n");
 
@@ -55,7 +57,7 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
         getFireArms().add(new FireArmModel(1L,
                 (StringUtilsFireArmsCategory.HAND_GUNS.getCategoryName()),
                 "GLOCK-19",
-                5).new FireArmSpecification("9x19mm",
+                5, 325.00).new FireArmSpecification("9x19mm",
                 "600g",
                 "670g",
                 "855g",
@@ -66,7 +68,7 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
         getFireArms().add(new FireArmModel(2L,
                 (StringUtilsFireArmsCategory.LONG_GUNS.getCategoryName()),
                 "AK-47",
-                5).new FireArmSpecification("7.62×39mm",
+                5,1288.46).new FireArmSpecification("7.62x39mm",
                 "3.47 Kg",
                 "3.90 Kg",
                 "4.39 Kg",
@@ -101,28 +103,44 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
 
     private void UpdatingSoldFireArms() {
         int iterationSold = 0;
+        boolean listContainsSelectedFireArm = false;
         if (!getSoldFireArms().isEmpty()){
             for (var fireArmsSold:getSoldFireArms()){
                 if (fireArmsSold.getFireArmName().equals(fireArmName)){
-                    getSoldFireArms().get(iterationSold).setStockAmount
-                    (getSoldFireArms().get(iterationSold).getStockAmount()+amountToSell);
+                    listContainsSelectedFireArm = true;
+                    break;
                 }
                 iterationSold++;
             }
-        } else {
-           getSoldFireArms().add(new FireArmModel
-                   (getFireArms().get(iteration).getFireArmId(),
-                   getFireArms().get(iteration).getFireArmCategory(),
-                   getFireArms().get(iteration).getFireArmName(),
-                   amountToSell).new FireArmSpecification
-                   (getFireArms().get(iteration).getCaliber(),
-                   getFireArms().get(iteration).getWeightWithoutMagazine(),
-                   getFireArms().get(iteration).getWeightWithEmptyMagazine(),
-                   getFireArms().get(iteration).getWeightWithLoadedMagazine(),
-                   getFireArms().get(iteration).getMagazineCapacity(),
-                   getFireArms().get(iteration).getBarrelLength(),
-                   getFireArms().get(iteration).getTriggerPull()));
         }
+        if (listContainsSelectedFireArm){
+            UpdateExistingSoldFireArm(iterationSold);
+        } else{
+            addNewSoldItemToList();
+        }
+        totalSoldPrice+=(getFireArms().get(iteration).getPricePerItem() * amountToSell);
+    }
+
+    private void addNewSoldItemToList() {
+        getSoldFireArms().add(new FireArmModel
+                (getFireArms().get(iteration).getFireArmId(),
+                getFireArms().get(iteration).getFireArmCategory(),
+                getFireArms().get(iteration).getFireArmName(),
+                amountToSell,
+                getFireArms().get(iteration).getPricePerItem())
+                .new FireArmSpecification
+                (getFireArms().get(iteration).getCaliber(),
+                getFireArms().get(iteration).getWeightWithoutMagazine(),
+                getFireArms().get(iteration).getWeightWithEmptyMagazine(),
+                getFireArms().get(iteration).getWeightWithLoadedMagazine(),
+                getFireArms().get(iteration).getMagazineCapacity(),
+                getFireArms().get(iteration).getBarrelLength(),
+                getFireArms().get(iteration).getTriggerPull())
+        );
+    }
+    private void UpdateExistingSoldFireArm(int iterationSold) {
+        getSoldFireArms().get(iterationSold).setStockAmount
+        (getSoldFireArms().get(iterationSold).getStockAmount()+amountToSell);
     }
 
     private void testName() {
@@ -157,9 +175,9 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
          iteration = 0;
         for (var fireArm: getFireArms()) {
            if (fireArm.getFireArmName().equals(fireArmName)
-                    && fireArm.getStockAmount() >= amountToSell
-                    && amountToSell > lowestAmount){
-                availableAmountForSelectedFireArm = getFireArms().get(iteration).getStockAmount();
+               && fireArm.getStockAmount() >= amountToSell
+               && amountToSell > lowestAmount){
+               availableAmountForSelectedFireArm = getFireArms().get(iteration).getStockAmount();
                 return true;
             }
             iteration++;
@@ -196,6 +214,7 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
             for (var fireArm: getSoldFireArms()) {
                 printOutFireArm.accept(fireArm);
             }
+            System.out.println("Total sold price = $" + totalSoldPrice);
         } else {
             System.out.println(StringUtilsFireArmsServiceImplMessages.NOTHING_SOLD_MESSAGE.getMessage());
         }

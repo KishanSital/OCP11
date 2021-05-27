@@ -2,7 +2,7 @@ package chapter12_13.utils;
 
 public enum StringUtilsFireArmsServiceImplMessages {
     INSERT_NAME_MESSAGE("Enter the name of the firearm you'd like to sell"),
-    FIREARM_NOT_EXISTENT_MESSAGE("This firearm does not exist, please type an existent name from the list"),
+    FIREARM_NOT_EXISTENT_MESSAGE("This firearm may be out of stock or it does not exist, please type another name from the list"),
     INSERT_AMOUNT_MESSAGE("Enter the amount you'd like to sell"),
     SELECTED_AMOUNT_NOT_AVAILABLE_MESSAGE("The selected amount is not available, please try again"),
     IN_STOCK_MESSAGE("The firearms which are in stock are"),
