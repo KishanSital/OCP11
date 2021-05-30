@@ -1,5 +1,8 @@
 package mypackage.services;
 
+import mypackage.annotations.*;
+
+@Service
 @FunctionalInterface
 public interface PrintMessageService {
     void print(String message); //SAM

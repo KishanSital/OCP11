@@ -1,6 +1,7 @@
 package chapter12_13.models;
 
 public class FireArmModel {
+
     private Long fireArmId;
     private String fireArmCategory;
     private String fireArmName;

@@ -1,7 +1,9 @@
 package mypackage.services;
 
+import mypackage.annotations.*;
 import static mypackage.serviceImpl.TriesValidationServiceImpl.*;
 
+@Service
 public abstract interface MenuService {
     // none of these abstract methods are required to be implement and overridden
     String toString();

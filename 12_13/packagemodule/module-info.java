@@ -5,4 +5,5 @@ module mypackage {
 	exports mypackage.exceptions;
 	exports mypackage.serviceImpl;
 	exports mypackage.services;
+	exports mypackage.annotations;
 }

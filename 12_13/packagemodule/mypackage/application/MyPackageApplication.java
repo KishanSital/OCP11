@@ -1,8 +1,7 @@
 package mypackage.application;
 
 import mypackage.models.*;
-import mypackage.serviceImpl.LoginServiceImpl;
-import mypackage.serviceImpl.UserSessionServiceImpl;
+import mypackage.serviceImpl.*;
 
 public class MyPackageApplication {
     public static void startLoginService(UserModel expectedUser) {

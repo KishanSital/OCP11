@@ -1,8 +1,9 @@
 package mypackage.services;
 
+import mypackage.annotations.*;
 import mypackage.models.*;
 import java.util.function.*;
-
+@Service
 public interface LoginService {
     void init();
     void startLoginService();
