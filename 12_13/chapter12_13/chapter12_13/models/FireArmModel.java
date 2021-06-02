@@ -18,6 +18,7 @@ public class FireArmModel {
         this.fireArmName = fireArmName;
         this.stockAmount = stockAmount;
         this.pricePerItem = pricePerItem;
+        
     }
 
     public FireArmModel(FireArmModel fireArmModel) {

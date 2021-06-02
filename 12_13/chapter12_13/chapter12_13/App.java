@@ -4,6 +4,7 @@ import chapter12_13.serviceImpl.*;
 import mypackage.application.*;
 import mypackage.models.*;
 import mypackage.utils.*;
+import chapter12_13.views.*;
 
 
 public class App {
@@ -24,10 +25,10 @@ public class App {
         System.out.println(userModel);
         MyPackageApplication.startLoginService(userModel);
 
-        var fireArmsService = new FireArmsServiceImpl();
-        fireArmsService.insertStandardFireArms();
+        var fireArmsView = new FireArmsView();
+        fireArmsView.insertStandardFireArms();
 
-        var loggedInMenuServiceImpl = new LoggedInMenuServiceImpl(fireArmsService);
+        var loggedInMenuServiceImpl = new LoggedInMenuServiceImpl(fireArmsView);
         loggedInMenuServiceImpl.displayMenu();
 
     }

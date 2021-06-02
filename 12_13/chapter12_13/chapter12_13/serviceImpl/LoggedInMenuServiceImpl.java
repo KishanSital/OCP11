@@ -1,5 +1,6 @@
 package chapter12_13.serviceImpl;
 
+import chapter12_13.views.FireArmsView;
 import mypackage.services.*;
 import mypackage.utils.*;
 import java.util.*;
@@ -8,13 +9,13 @@ import static mypackage.serviceImpl.TriesValidationServiceImpl.*;
 public class LoggedInMenuServiceImpl implements MenuService{
 
     private Scanner scanner;
-    private FireArmsServiceImpl fireArmsService;
+    private FireArmsView fireArmsView;
     private static List<String> menuOptionsList;
     private final int exitCode = 4;
 
-    public LoggedInMenuServiceImpl(FireArmsServiceImpl fireArmsService){
+    public LoggedInMenuServiceImpl(FireArmsView fireArmsView){
         super();
-        this.fireArmsService = fireArmsService;
+        this.fireArmsView = fireArmsView;
         init();
     }
 
@@ -40,15 +41,15 @@ public class LoggedInMenuServiceImpl implements MenuService{
             switch (choiceEntry) {
                 case 1:
                     resetAllValidationServices();
-                    fireArmsService.sellFireArms();
+                    fireArmsView.sellFireArms();
                     break;
                 case 2:
                     resetAllValidationServices();
-                    fireArmsService.displayAvailableFireArms();
+                    fireArmsView.displayAvailableFireArms();
                     break;
                 case 3:
                     resetAllValidationServices();
-                    fireArmsService.displaySoldFireArms();
+                    fireArmsView.displaySoldFireArms();
                     break;
                 case 4:
                     resetAllValidationServices();

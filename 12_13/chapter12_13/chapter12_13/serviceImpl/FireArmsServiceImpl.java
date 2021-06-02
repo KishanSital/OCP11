@@ -11,14 +11,13 @@ import static mypackage.serviceImpl.TriesValidationServiceImpl.*;
 import java.util.*;
 import java.util.function.*;
 
-public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsService {
+public abstract class FireArmsServiceImpl extends FireArmsRepository implements FireArmsService {
 
-    private Scanner scanner = new Scanner(System.in);
     private final int lowestAmount = 0;
     private int availableAmountForSelectedFireArm = 0;
-    private int amountToSell = 0;
+    protected int amountToSell = 0;
+    protected String fireArmName;
     private int iteration = 0;
-    private String fireArmName;
     private double totalSoldPrice = 0;
     private Consumer<FireArmModel.FireArmSpecification> printOutFireArm = fireArm -> System.out.println("Firearm:\n" +
             "firearm id = " + fireArm.getFireArmId() + "\n" +
@@ -77,19 +76,9 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
                 "17.7 N"));
     }
 
-    @Override
-    public void sellFireArms() {
-        if (getFireArms().isEmpty()){
-            System.out.println(StringUtilsFireArmsServiceImplMessages.OUT_OF_STOCK_MESSAGE.getMessage());
-        }else {
-            testName();
-            testAmount();
-            updateFireArms();
-            System.out.println(StringUtilsMyPackage.OPERATION_SUCCESSFUL_MESSAGE.getStringValue());
-        }
-    }
 
-    private void updateFireArms() {
+
+    protected void updateFireArms() {
         UpdatingSoldFireArms();
         UpdatingStorageFireArms();
     }
@@ -143,35 +132,8 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
         (getSoldFireArms().get(iterationSold).getStockAmount()+amountToSell);
     }
 
-    private void testName() {
-        resetTriesService();
-        boolean isFireArmExistent;
-        do {
-            System.out.println(StringUtilsFireArmsServiceImplMessages.INSERT_NAME_MESSAGE.getMessage());
-            fireArmName = scanner.next();
-            isFireArmExistent = checkIfFireArmExists(fireArmName);
-            if (!isFireArmExistent){
-                triesValidation();
-                System.out.println(StringUtilsFireArmsServiceImplMessages.FIREARM_NOT_EXISTENT_MESSAGE.getMessage());
-            }
-        } while(!isFireArmExistent);
-    }
 
-    private void testAmount() {
-        resetTriesService();
-        boolean isAmountAvailable;
-        do {
-            System.out.println(StringUtilsFireArmsServiceImplMessages.INSERT_AMOUNT_MESSAGE.getMessage());
-            amountToSell = scanner.nextInt();
-            isAmountAvailable = checkIfSelectedAmountIsAvailable(amountToSell, fireArmName);
-            if (!isAmountAvailable){
-                triesValidation();
-                System.out.println(StringUtilsFireArmsServiceImplMessages.SELECTED_AMOUNT_NOT_AVAILABLE_MESSAGE.getMessage());
-            }
-        } while (!isAmountAvailable);
-    }
-
-    private boolean checkIfSelectedAmountIsAvailable(int amountToSell, String fireArmName) {
+    protected boolean checkIfSelectedAmountIsAvailable(int amountToSell, String fireArmName) {
          iteration = 0;
         for (var fireArm: getFireArms()) {
            if (fireArm.getFireArmName().equals(fireArmName)
@@ -186,7 +148,7 @@ public class FireArmsServiceImpl extends FireArmsRepository implements FireArmsS
     }
 
 
-    private boolean checkIfFireArmExists(String fireArmName) {
+    protected boolean checkIfFireArmExists(String fireArmName) {
         for (int i = 0; i < getFireArms().size(); i++){
             if (getFireArms().get(i).getFireArmName().equals(fireArmName)){
                 return true;
