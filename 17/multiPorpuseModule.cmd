@@ -1,0 +1,2 @@
+javac -p mods -d multiPorpuseModule/classes multiPorpuseModule/chapter17/*.java multiPorpuseModule/chapter17/views/*.java multiPorpuseModule/chapter17/serviceImpl/*.java  multiPorpuseModule/*.java
+jar -cf mods/chapter.seventeen.consumer.jar -C multiPorpuseModule/classes .

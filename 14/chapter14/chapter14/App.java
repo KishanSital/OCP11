@@ -26,6 +26,8 @@ public class App {
         var expansionView = new ExpansionView();
         expansionView.insertStandardExpansionPlans();
 
+		assert true: "Assert was enabled and reached";
+		
         var loggedInMenuServiceImpl = new LoggedInMenuServiceImpl(fireArmsView, expansionView);
         loggedInMenuServiceImpl.displayMenu();
 

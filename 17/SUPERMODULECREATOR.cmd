@@ -1,0 +1,4 @@
+call CreateMyPackageModule.cmd
+call serviceProviderInterfaceModule.cmd
+call multiPorpuseModule.cmd
+call runMultiPorpuseModule.cmd
