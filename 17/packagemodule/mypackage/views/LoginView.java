@@ -7,14 +7,20 @@ import mypackage.services.PrintMessageService;
 import mypackage.utils.IntUtilsMyPackage;
 import mypackage.utils.StringUtilsMyPackage;
 
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
+
 import static mypackage.serviceImpl.TriesValidationServiceImpl.resetTriesService;
 import static mypackage.serviceImpl.TriesValidationServiceImpl.triesValidation;
 
 public class LoginView {
     private LoginService loginService;
     private Scanner scanner;
-    private String [] args ;
+    private String[] args;
     public PrintMessageService println = System.out::println; // instance method on parameter reference
 
 
@@ -36,16 +42,24 @@ public class LoginView {
 
 
     public void providingCredentials() {
-        println.print(StringUtilsMyPackage.PROVIDE_USERNAME_MESSAGE.getStringValue());
-        args [IntUtilsMyPackage.USERNAME_INDEX.getIntValue()] = scanner.next();
-        println.print(StringUtilsMyPackage.PROVIDE_PASSWORD_MESSAGE.getStringValue());
-        args [IntUtilsMyPackage.PASSWORD_INDEX.getIntValue()] = scanner.next();
+        //using console class for user interaction
+        Console console = System.console();
+        if (console == null) {
+            System.out.println("console not available");
+        } else {
+            args[IntUtilsMyPackage.USERNAME_INDEX.getIntValue()] = console.readLine(StringUtilsMyPackage.PROVIDE_USERNAME_MESSAGE.getStringValue());
+            console.writer().format("Hi %s", args[IntUtilsMyPackage.USERNAME_INDEX.getIntValue()]);
+            console.writer().println();
+
+            char[] password = console.readPassword(StringUtilsMyPackage.PROVIDE_PASSWORD_MESSAGE.getStringValue());
+            args[IntUtilsMyPackage.PASSWORD_INDEX.getIntValue()] = (String.valueOf(password));
+        }
     }
 
     public void authentication() {
         LoginException loginException = new LoginException(); // must be final or effectively final, to be used in
         //try with resource statement
-        try (loginException){ // if both the close and the code within the try clause throw an exception then
+        try (loginException) { // if both the close and the code within the try clause throw an exception then
             // we'd then have suppressed exceptions, with the one thrown from protected code being the primary exception
             loginService.setAuthentication(loginService.authenticationResult());
             if (!loginService.isAuthentication()) {
@@ -53,7 +67,7 @@ public class LoginView {
             }
         } catch (LoginException e) {
             println.print(e.getMessage());
-            for (Throwable t: e.getSuppressed()) {
+            for (Throwable t : e.getSuppressed()) {
                 println.print("Suppressed: " + t.getMessage()); // looping through the suppressed exceptions
             }
         } finally {
@@ -71,6 +85,6 @@ public class LoginView {
        disabling assertions command
         java -ea:mypackage... -da:mypackage.views.LoginView MypackageApplication (disabling for specific class)*/
 
-        assert (1+1) == 2 :"1 + 1 is indeed 2"; // assert with optional message
+        assert (1 + 1) == 2 : "1 + 1 is indeed 2"; // assert with optional message
     }
 }

@@ -8,10 +8,11 @@ import mypackage.utils.*;
 
 import java.util.*;
 import java.util.function.*;
+
 import static mypackage.serviceImpl.TriesValidationServiceImpl.*;
 import static mypackage.serviceImpl.UserSessionServiceImpl.*;
 
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
     public boolean isAuthentication;
     private boolean isLoggedIn;
     private UserModel userModel;
@@ -26,15 +27,17 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public void provideCredentials(String...args) {
+    public void provideCredentials(String... args) {
         userModel.setUsername(args[IntUtilsMyPackage.USERNAME_INDEX.getIntValue()]);
-        userModel.setPassword(args[IntUtilsMyPackage.PASSWORD_INDEX.getIntValue()]);
+        char[] chars = args[IntUtilsMyPackage.PASSWORD_INDEX.getIntValue()].toCharArray();
+        userModel.setPassword(chars);
     }
+
     @Override
     public boolean authenticationResult() {
         isAuthentication = authenticateUser(k -> {
             if ((LOGIN_USERNAME.equalsIgnoreCase(k.getUsername())) &&
-                    (LOGIN_PASSWORD.equals(k.getPassword()))) {
+                    (Arrays.equals(LOGIN_PASSWORD, k.getPassword()))) {
                 return true;
             } else {
                 return false;
@@ -42,6 +45,7 @@ public class LoginServiceImpl implements LoginService{
         });
         return isAuthentication;
     }
+
     @Override
     public boolean authenticateUser(Predicate<UserModel> loggingIn) {
         isLoggedIn = false;
@@ -50,6 +54,7 @@ public class LoginServiceImpl implements LoginService{
         }
         return isLoggedIn;
     }
+
     @Override
     public String getLoggedInUser() {
         return LOGIN_USERNAME;

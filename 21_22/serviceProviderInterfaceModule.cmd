@@ -1,0 +1,2 @@
+javac -p mods -d serviceProviderInterfaceModule/classes serviceProviderInterfaceModule/chapter21/models/*.java serviceProviderInterfaceModule/chapter21/services/*.java serviceProviderInterfaceModule/chapter21/utils/*.java serviceProviderInterfaceModule/chapter21/repositories/*.java  serviceProviderInterfaceModule/*.java
+jar -cf mods/chapter.seventeen.serviceproviderinterface.jar -C serviceProviderInterfaceModule/classes .
